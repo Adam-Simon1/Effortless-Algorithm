@@ -1,0 +1,29 @@
+{
+  "name": "algorithms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Adam-Simon1/Alghoritms.git"
+  },
+  "keywords": [
+    "alghoritms",
+    "sorting"
+  ],
+  "author": "Adam Simon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Adam-Simon1/Alghoritms/issues"
+  },
+  "homepage": "https://github.com/Adam-Simon1/Alghoritms#readme",
+  "devDependencies": {
+    "@types/node": "^20.4.8",
+    "typescript": "^5.1.6"
+  }
+}
