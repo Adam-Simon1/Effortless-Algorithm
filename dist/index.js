@@ -206,9 +206,63 @@ function bubbleSort(arr) {
         }
     }
 }
+function treeSort(arr) {
+    class TreeNode {
+        constructor(value) {
+            this.value = value;
+            this.left = null;
+            this.right = null;
+        }
+    }
+    class BinarySearchTree {
+        constructor() {
+            this.root = null;
+        }
+        insert(value) {
+            const newNode = new TreeNode(value);
+            if (!this.root) {
+                this.root = newNode;
+            }
+            else {
+                this.insertNode(this.root, newNode);
+            }
+        }
+        insertNode(node, newNode) {
+            if (newNode.value < node.value) {
+                if (!node.left) {
+                    node.left = newNode;
+                }
+                else {
+                    this.insertNode(node.left, newNode);
+                }
+            }
+            else {
+                if (!node.right) {
+                    node.right = newNode;
+                }
+                else {
+                    this.insertNode(node.right, newNode);
+                }
+            }
+        }
+        inOrderTraversal(node, result = []) {
+            if (node) {
+                this.inOrderTraversal(node.left, result);
+                result.push(node.value);
+                this.inOrderTraversal(node.right, result);
+            }
+            return result;
+        }
+    }
+    const tree = new BinarySearchTree();
+    for (const value of arr) {
+        tree.insert(value);
+    }
+    return tree.inOrderTraversal(tree.root);
+}
 // Example usage
-const unsortedArray = [64, 25, 12, 22, 11];
-shellSort(unsortedArray);
-console.log(unsortedArray);
+const unsortedArray = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+const sortedArray = treeSort(unsortedArray);
+console.log(sortedArray);
 export {};
 //# sourceMappingURL=index.js.map

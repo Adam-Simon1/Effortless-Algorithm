@@ -251,4 +251,69 @@ function bubbleSort(arr: number[]) {
   }
 }
 
+function treeSort(arr: number[]): number[] {
+  class TreeNode {
+    value: number;
+    left: TreeNode | null;
+    right: TreeNode | null;
 
+    constructor(value: number) {
+      this.value = value;
+      this.left = null;
+      this.right = null;
+    }
+  }
+
+  class BinarySearchTree {
+    root: TreeNode | null;
+
+    constructor() {
+      this.root = null;
+    }
+
+    insert(value: number) {
+      const newNode = new TreeNode(value);
+      if (!this.root) {
+        this.root = newNode;
+      } else {
+        this.insertNode(this.root, newNode);
+      }
+    }
+
+    insertNode(node: TreeNode, newNode: TreeNode) {
+      if (newNode.value < node.value) {
+        if (!node.left) {
+          node.left = newNode;
+        } else {
+          this.insertNode(node.left, newNode);
+        }
+      } else {
+        if (!node.right) {
+          node.right = newNode;
+        } else {
+          this.insertNode(node.right, newNode);
+        }
+      }
+    }
+
+    inOrderTraversal(node: TreeNode | null, result: number[] = []): number[] {
+      if (node) {
+        this.inOrderTraversal(node.left, result);
+        result.push(node.value);
+        this.inOrderTraversal(node.right, result);
+      }
+      return result;
+    }
+  }
+  
+  const tree = new BinarySearchTree();
+  for (const value of arr) {
+    tree.insert(value);
+  }
+  return tree.inOrderTraversal(tree.root);
+}
+
+// Example usage
+const unsortedArray = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
+const sortedArray = treeSort(unsortedArray);
+console.log(sortedArray);
