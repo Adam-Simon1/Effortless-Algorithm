@@ -228,3 +228,27 @@ function shellSort(arr: number[]) {
   }
 }
 
+function bubbleSort(arr: number[]) {
+  const n = arr.length;
+
+  for (let i = 0; i < n - 1; i++) {
+    let swapped = false;
+
+    for (let j = 0; j < n - i - 1; j++) {
+      if (arr[j] > arr[j + 1]) {
+        // Swap arr[j] and arr[j+1]
+        const temp = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = temp;
+        swapped = true;
+      }
+    }
+
+    // If no two elements were swapped by inner loop, the array is already sorted
+    if (!swapped) {
+      break;
+    }
+  }
+}
+
+
