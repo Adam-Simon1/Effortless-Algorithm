@@ -107,4 +107,85 @@ function insertionSort(arr: number[]) {
   }
 }
 
+function timSort(arr: number[]) {
+  const MIN_MERGE = 32;
+  const n = arr.length;
+
+  for (let i = 0; i < n; i += MIN_MERGE) {
+    insertionSortTim(arr, i, Math.min(i + MIN_MERGE - 1, n - 1));
+  }
+
+  let size = MIN_MERGE;
+  while (size < n) {
+    for (let start = 0; start < n; start += size * 2) {
+      const mid = start + size - 1;
+      const end = Math.min(start + size * 2 - 1, n - 1);
+      mergeTim(arr, start, mid, end);
+    }
+    size *= 2;
+  }
+
+  function insertionSortTim(arr: number[], left: number, right: number) {
+    for (let i = left + 1; i <= right; i++) {
+      const key = arr[i];
+      let j = i - 1;
+      while (j >= left && arr[j] > key) {
+        arr[j + 1] = arr[j];
+        j--;
+      }
+      arr[j + 1] = key;
+    }
+  }
+
+  function mergeTim(arr: number[], left: number, mid: number, right: number) {
+    const leftSize = mid - left + 1;
+    const rightSize = right - mid;
+
+    const leftArray = new Array(leftSize);
+    const rightArray = new Array(rightSize);
+
+    for (let i = 0; i < leftSize; i++) {
+      leftArray[i] = arr[left + i];
+    }
+    for (let j = 0; j < rightSize; j++) {
+      rightArray[j] = arr[mid + 1 + j];
+    }
+
+    let i = 0;
+    let j = 0;
+    let k = left;
+    while (i < leftSize && j < rightSize) {
+      if (leftArray[i] <= rightArray[j]) {
+        arr[k] = leftArray[i];
+        i++;
+      } else {
+        arr[k] = rightArray[j];
+        j++;
+      }
+      k++;
+    }
+
+    while (i < leftSize) {
+      arr[k] = leftArray[i];
+      i++;
+      k++;
+    }
+
+    while (j < rightSize) {
+      arr[k] = rightArray[j];
+      j++;
+      k++;
+    }
+  }
+
+  function calcMinRun(n: number): number {
+    let r = 0;
+    while (n >= MIN_MERGE) {
+      r |= n & 1;
+      n >>= 1;
+    }
+    return n + r;
+  }
+}
+
 
