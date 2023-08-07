@@ -593,13 +593,35 @@ function sentinelLinearSearch(
   return -1;
 }
 
+function binarySearch(
+  arr: number[] | string[],
+  target: number | string
+): number {
+  let left = 0;
+  let right = arr.length - 1;
+
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+
+    if (arr[mid] === target) {
+      return mid;
+    } else if (arr[mid] < target) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+
+  return -1;
+}
+
 // Example usage
-const inputArray = [64, 34, 25, 12, 22, 11, 90];
+const inputArray = [11, 22, 34, 45, 56, 67, 78];
 const targetValue = 22;
-const index1 = sentinelLinearSearch(inputArray, targetValue);
+const index1 = binarySearch(inputArray, targetValue);
 console.log(index1);
 
 const namesArray = ["Alice", "Bob", "Charlie", "David", "Emily", "Frank"];
 const targetName = "David";
-const index2 = sentinelLinearSearch(namesArray, targetName);
+const index2 = binarySearch(namesArray, targetName);
 console.log(index2);

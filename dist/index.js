@@ -464,20 +464,31 @@ function sentinelLinearSearch(arr, target) {
     }
     return -1;
 }
+function binarySearch(arr, target) {
+    let left = 0;
+    let right = arr.length - 1;
+    while (left <= right) {
+        const mid = Math.floor((left + right) / 2);
+        if (arr[mid] === target) {
+            return mid; // Return the index where the target was found
+        }
+        else if (arr[mid] < target) {
+            left = mid + 1;
+        }
+        else {
+            right = mid - 1;
+        }
+    }
+    return -1; // Return -1 if the target was not found in the array
+}
 // Example usage
-const inputArray = [64, 34, 25, 12, 22, 11, 90];
+const inputArray = [11, 22, 34, 45, 56, 67, 78];
 const targetValue = 22;
-const index1 = sentinelLinearSearch(inputArray, targetValue);
+const index1 = binarySearch(inputArray, targetValue);
 console.log(index1);
 const namesArray = ["Alice", "Bob", "Charlie", "David", "Emily", "Frank"];
 const targetName = "David";
-const index2 = sentinelLinearSearch(namesArray, targetName);
+const index2 = binarySearch(namesArray, targetName);
 console.log(index2);
-const stringArray = ["alice", "charlie", "bob", "emily", "david", "frank"];
-const sorted = bogoSort(stringArray);
-console.log(sorted);
-const numberArray = [9, 4, 6, 2, 5, 1];
-const sorted2 = bogoSort(numberArray);
-console.log(sorted2);
 export {};
 //# sourceMappingURL=index.js.map
