@@ -342,9 +342,32 @@ function strandSort(arr) {
     }
     return merge(strandSort(arr), sublist);
 }
+function cocktailShakerSort(arr) {
+    let swapped;
+    do {
+        swapped = false;
+        for (let i = 0; i < arr.length - 1; i++) {
+            if (arr[i] > arr[i + 1]) {
+                [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
+                swapped = true;
+            }
+        }
+        if (!swapped) {
+            break;
+        }
+        swapped = false;
+        for (let i = arr.length - 2; i >= 0; i--) {
+            if (arr[i] > arr[i + 1]) {
+                [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
+                swapped = true;
+            }
+        }
+    } while (swapped);
+    return arr;
+}
 // Example usage
 const unsortedArray = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
-const sortedArray = strandSort(unsortedArray);
+const sortedArray = cocktailShakerSort(unsortedArray);
 console.log(sortedArray);
 export {};
 //# sourceMappingURL=index.js.map
