@@ -677,10 +677,42 @@ function jumpSearch(arr: number[] | string[], target: number | string): number {
   return -1;
 }
 
+function interpolationSearch(arr: number[], target: number): number {
+  let left = 0;
+  let right = arr.length - 1;
+
+  while (left <= right && target >= arr[left] && target <= arr[right]) {
+    if (left === right) {
+      if (arr[left] === target) {
+        return left;
+      }
+      return -1;
+    }
+
+    const pos =
+      left +
+      Math.floor(
+        ((target - arr[left]) * (right - left)) / (arr[right] - arr[left])
+      );
+
+    if (arr[pos] === target) {
+      return pos;
+    }
+
+    if (arr[pos] < target) {
+      left = pos + 1;
+    } else {
+      right = pos - 1;
+    }
+  }
+
+  return -1;
+}
+
 // Example usage
 const inputArray = [11, 22, 34, 45, 56, 67, 78];
 const targetValue = 22;
-const index1 = jumpSearch(inputArray, targetValue);
+const index1 = interpolationSearch(inputArray, targetValue);
 console.log(index1);
 
 const namesArray = ["Alice", "Bob", "Charlie", "David", "Emily", "Frank"];
