@@ -481,7 +481,33 @@ function gnomeSort(arr: number[]): number[] {
   return arr;
 }
 
+function oddEvenSort(arr: number[]): number[] {
+  let sorted = false;
+
+  while (!sorted) {
+    sorted = true;
+
+    // Perform odd-even comparisons and swaps
+    for (let i = 1; i < arr.length - 1; i += 2) {
+      if (arr[i] > arr[i + 1]) {
+        [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
+        sorted = false;
+      }
+    }
+
+    // Perform even-odd comparisons and swaps
+    for (let i = 0; i < arr.length - 1; i += 2) {
+      if (arr[i] > arr[i + 1]) {
+        [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
+        sorted = false;
+      }
+    }
+  }
+
+  return arr;
+}
+
 // Example usage
 const unsortedArray = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
-const sortedArray = gnomeSort(unsortedArray);
+const sortedArray = oddEvenSort(unsortedArray);
 console.log(sortedArray);
