@@ -365,9 +365,28 @@ function cocktailShakerSort(arr) {
     } while (swapped);
     return arr;
 }
+function combSort(arr) {
+    const shrinkFactor = 1.3;
+    let gap = arr.length;
+    let swapped;
+    do {
+        gap = Math.floor(gap / shrinkFactor);
+        if (gap < 1) {
+            gap = 1;
+        }
+        swapped = false;
+        for (let i = 0; i + gap < arr.length; i++) {
+            if (arr[i] > arr[i + gap]) {
+                [arr[i], arr[i + gap]] = [arr[i + gap], arr[i]];
+                swapped = true;
+            }
+        }
+    } while (gap > 1 || swapped);
+    return arr;
+}
 // Example usage
 const unsortedArray = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
-const sortedArray = cocktailShakerSort(unsortedArray);
+const sortedArray = combSort(unsortedArray);
 console.log(sortedArray);
 export {};
 //# sourceMappingURL=index.js.map
