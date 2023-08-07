@@ -300,9 +300,51 @@ function cycleSort(arr) {
     }
     return arr;
 }
+function strandSort(arr) {
+    if (arr.length <= 1) {
+        return arr;
+    }
+    const sublist = [arr[0]];
+    arr.splice(0, 1);
+    let i = 0;
+    while (i < arr.length) {
+        if (arr[i] > sublist[sublist.length - 1]) {
+            sublist.push(arr[i]);
+            arr.splice(i, 1);
+        }
+        else {
+            i++;
+        }
+    }
+    function merge(arr1, arr2) {
+        const merged = [];
+        let i = 0;
+        let j = 0;
+        while (i < arr1.length && j < arr2.length) {
+            if (arr1[i] < arr2[j]) {
+                merged.push(arr1[i]);
+                i++;
+            }
+            else {
+                merged.push(arr2[j]);
+                j++;
+            }
+        }
+        while (i < arr1.length) {
+            merged.push(arr1[i]);
+            i++;
+        }
+        while (j < arr2.length) {
+            merged.push(arr2[j]);
+            j++;
+        }
+        return merged;
+    }
+    return merge(strandSort(arr), sublist);
+}
 // Example usage
 const unsortedArray = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
-const sortedArray = cycleSort(unsortedArray);
+const sortedArray = strandSort(unsortedArray);
 console.log(sortedArray);
 export {};
 //# sourceMappingURL=index.js.map
