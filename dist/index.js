@@ -482,38 +482,80 @@ function binarySearch(arr, target) {
     return -1;
 }
 function ternarySearch(arr, target) {
+    function ternarySearchRecursive(arr, left, right, target) {
+        if (left > right) {
+            return -1;
+        }
+        const mid1 = left + Math.floor((right - left) / 3);
+        const mid2 = right - Math.floor((right - left) / 3);
+        if (arr[mid1] === target) {
+            return mid1;
+        }
+        else if (arr[mid2] === target) {
+            return mid2;
+        }
+        if (target < arr[mid1]) {
+            return ternarySearchRecursive(arr, left, mid1 - 1, target);
+        }
+        else if (target > arr[mid2]) {
+            return ternarySearchRecursive(arr, mid2 + 1, right, target);
+        }
+        else {
+            return ternarySearchRecursive(arr, mid1 + 1, mid2 - 1, target);
+        }
+    }
     return ternarySearchRecursive(arr, 0, arr.length - 1, target);
 }
-function ternarySearchRecursive(arr, left, right, target) {
-    if (left > right) {
-        return -1; // Base case: target not found
+function jumpSearch(arr, target) {
+    const n = arr.length;
+    let blockSize = Math.floor(Math.sqrt(n));
+    let prev = 0;
+    while (arr[Math.min(blockSize, n) - 1] < target) {
+        prev = blockSize;
+        blockSize += Math.floor(Math.sqrt(n));
+        if (prev >= n) {
+            return -1;
+        }
     }
-    const mid1 = left + Math.floor((right - left) / 3);
-    const mid2 = right - Math.floor((right - left) / 3);
-    if (arr[mid1] === target) {
-        return mid1; // Return index if target is found at mid1
+    while (arr[prev] < target) {
+        prev++;
+        if (prev === Math.min(blockSize, n)) {
+            return -1;
+        }
     }
-    else if (arr[mid2] === target) {
-        return mid2; // Return index if target is found at mid2
+    if (arr[prev] === target) {
+        return prev;
     }
-    if (target < arr[mid1]) {
-        return ternarySearchRecursive(arr, left, mid1 - 1, target); // Search in the left third
+    return -1;
+}
+function interpolationSearch(arr, target) {
+    let left = 0;
+    let right = arr.length - 1;
+    while (left <= right && target >= arr[left] && target <= arr[right]) {
+        if (left === right) {
+            if (arr[left] === target) {
+                return left;
+            }
+            return -1;
+        }
+        const pos = left +
+            Math.floor(((target - arr[left]) * (right - left)) / (arr[right] - arr[left]));
+        if (arr[pos] === target) {
+            return pos;
+        }
+        if (arr[pos] < target) {
+            left = pos + 1;
+        }
+        else {
+            right = pos - 1;
+        }
     }
-    else if (target > arr[mid2]) {
-        return ternarySearchRecursive(arr, mid2 + 1, right, target); // Search in the right third
-    }
-    else {
-        return ternarySearchRecursive(arr, mid1 + 1, mid2 - 1, target); // Search in the middle third
-    }
+    return -1;
 }
 // Example usage
 const inputArray = [11, 22, 34, 45, 56, 67, 78];
 const targetValue = 22;
-const index1 = ternarySearch(inputArray, targetValue);
+const index1 = interpolationSearch(inputArray, targetValue);
 console.log(index1);
-const namesArray = ["Alice", "Bob", "Charlie", "David", "Emily", "Frank"];
-const targetName = "David";
-const index2 = ternarySearch(namesArray, targetName);
-console.log(index2);
 export {};
 //# sourceMappingURL=index.js.map

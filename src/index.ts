@@ -619,44 +619,71 @@ function ternarySearch(
   arr: number[] | string[],
   target: number | string
 ): number {
+  function ternarySearchRecursive(
+    arr: number[] | string[],
+    left: number,
+    right: number,
+    target: number | string
+  ): number {
+    if (left > right) {
+      return -1;
+    }
+
+    const mid1 = left + Math.floor((right - left) / 3);
+    const mid2 = right - Math.floor((right - left) / 3);
+
+    if (arr[mid1] === target) {
+      return mid1;
+    } else if (arr[mid2] === target) {
+      return mid2;
+    }
+
+    if (target < arr[mid1]) {
+      return ternarySearchRecursive(arr, left, mid1 - 1, target);
+    } else if (target > arr[mid2]) {
+      return ternarySearchRecursive(arr, mid2 + 1, right, target);
+    } else {
+      return ternarySearchRecursive(arr, mid1 + 1, mid2 - 1, target);
+    }
+  }
+
   return ternarySearchRecursive(arr, 0, arr.length - 1, target);
 }
 
-function ternarySearchRecursive(
-  arr: number[] | string[],
-  left: number,
-  right: number,
-  target: number | string
-): number {
-  if (left > right) {
-    return -1; // Base case: target not found
+function jumpSearch(arr: number[] | string[], target: number | string): number {
+  const n = arr.length;
+  let blockSize = Math.floor(Math.sqrt(n));
+  let prev = 0;
+
+  while (arr[Math.min(blockSize, n) - 1] < target) {
+    prev = blockSize;
+    blockSize += Math.floor(Math.sqrt(n));
+    if (prev >= n) {
+      return -1;
+    }
   }
 
-  const mid1 = left + Math.floor((right - left) / 3);
-  const mid2 = right - Math.floor((right - left) / 3);
-
-  if (arr[mid1] === target) {
-    return mid1; // Return index if target is found at mid1
-  } else if (arr[mid2] === target) {
-    return mid2; // Return index if target is found at mid2
+  while (arr[prev] < target) {
+    prev++;
+    if (prev === Math.min(blockSize, n)) {
+      return -1;
+    }
   }
 
-  if (target < arr[mid1]) {
-    return ternarySearchRecursive(arr, left, mid1 - 1, target); // Search in the left third
-  } else if (target > arr[mid2]) {
-    return ternarySearchRecursive(arr, mid2 + 1, right, target); // Search in the right third
-  } else {
-    return ternarySearchRecursive(arr, mid1 + 1, mid2 - 1, target); // Search in the middle third
+  if (arr[prev] === target) {
+    return prev;
   }
+
+  return -1;
 }
 
 // Example usage
 const inputArray = [11, 22, 34, 45, 56, 67, 78];
 const targetValue = 22;
-const index1 = ternarySearch(inputArray, targetValue);
+const index1 = jumpSearch(inputArray, targetValue);
 console.log(index1);
 
 const namesArray = ["Alice", "Bob", "Charlie", "David", "Emily", "Frank"];
 const targetName = "David";
-const index2 = ternarySearch(namesArray, targetName);
+const index2 = jumpSearch(namesArray, targetName);
 console.log(index2);
