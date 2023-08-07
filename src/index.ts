@@ -542,15 +542,34 @@ function linearSearch(
   return -1;
 }
 
+function sentinelLinearSearch(
+  arr: number[] | string[],
+  target: number | string
+): number {
+  const lastElement = arr[arr.length - 1];
+  arr[arr.length - 1] = target
 
+  let i = 0;
+  while (arr[i] !== target) {
+    i++;
+  }
+
+  arr[arr.length - 1] = lastElement;
+
+  if (i < arr.length - 1 || arr[arr.length - 1] === target) {
+    return i;
+  }
+
+  return -1;
+}
 
 // Example usage
 const inputArray = [64, 34, 25, 12, 22, 11, 90];
 const targetValue = 22;
-const index1 = linearSearch(inputArray, targetValue);
+const index1 = sentinelLinearSearch(inputArray, targetValue);
 console.log(index1);
 
 const namesArray = ["Alice", "Bob", "Charlie", "David", "Emily", "Frank"];
 const targetName = "David";
-const index2 = linearSearch(namesArray, targetName);
+const index2 = sentinelLinearSearch(namesArray, targetName);
 console.log(index2);

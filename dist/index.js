@@ -445,14 +445,27 @@ function linearSearch(arr, target) {
     }
     return -1;
 }
+function sentinelLinearSearch(arr, target) {
+    const lastElement = arr[arr.length - 1];
+    arr[arr.length - 1] = target; // Replace the last element with the target as a sentinel
+    let i = 0;
+    while (arr[i] !== target) {
+        i++;
+    }
+    arr[arr.length - 1] = lastElement; // Restore the original last element
+    if (i < arr.length - 1 || arr[arr.length - 1] === target) {
+        return i; // Return the index where the target was found
+    }
+    return -1; // Return -1 if the target was not found in the array
+}
 // Example usage
 const inputArray = [64, 34, 25, 12, 22, 11, 90];
 const targetValue = 22;
-const index1 = linearSearch(inputArray, targetValue);
+const index1 = sentinelLinearSearch(inputArray, targetValue);
 console.log(index1);
 const namesArray = ["Alice", "Bob", "Charlie", "David", "Emily", "Frank"];
 const targetName = "David";
-const index2 = linearSearch(namesArray, targetName);
+const index2 = sentinelLinearSearch(namesArray, targetName);
 console.log(index2);
 export {};
 //# sourceMappingURL=index.js.map
