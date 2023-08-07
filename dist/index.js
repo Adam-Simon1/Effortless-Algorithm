@@ -470,7 +470,7 @@ function binarySearch(arr, target) {
     while (left <= right) {
         const mid = Math.floor((left + right) / 2);
         if (arr[mid] === target) {
-            return mid; // Return the index where the target was found
+            return mid;
         }
         else if (arr[mid] < target) {
             left = mid + 1;
@@ -479,16 +479,41 @@ function binarySearch(arr, target) {
             right = mid - 1;
         }
     }
-    return -1; // Return -1 if the target was not found in the array
+    return -1;
+}
+function ternarySearch(arr, target) {
+    return ternarySearchRecursive(arr, 0, arr.length - 1, target);
+}
+function ternarySearchRecursive(arr, left, right, target) {
+    if (left > right) {
+        return -1; // Base case: target not found
+    }
+    const mid1 = left + Math.floor((right - left) / 3);
+    const mid2 = right - Math.floor((right - left) / 3);
+    if (arr[mid1] === target) {
+        return mid1; // Return index if target is found at mid1
+    }
+    else if (arr[mid2] === target) {
+        return mid2; // Return index if target is found at mid2
+    }
+    if (target < arr[mid1]) {
+        return ternarySearchRecursive(arr, left, mid1 - 1, target); // Search in the left third
+    }
+    else if (target > arr[mid2]) {
+        return ternarySearchRecursive(arr, mid2 + 1, right, target); // Search in the right third
+    }
+    else {
+        return ternarySearchRecursive(arr, mid1 + 1, mid2 - 1, target); // Search in the middle third
+    }
 }
 // Example usage
 const inputArray = [11, 22, 34, 45, 56, 67, 78];
 const targetValue = 22;
-const index1 = binarySearch(inputArray, targetValue);
+const index1 = ternarySearch(inputArray, targetValue);
 console.log(index1);
 const namesArray = ["Alice", "Bob", "Charlie", "David", "Emily", "Frank"];
 const targetName = "David";
-const index2 = binarySearch(namesArray, targetName);
+const index2 = ternarySearch(namesArray, targetName);
 console.log(index2);
 export {};
 //# sourceMappingURL=index.js.map
