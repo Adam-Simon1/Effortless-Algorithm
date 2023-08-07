@@ -1,5 +1,5 @@
 // Sorting algorithms
-function quickSort(arr: number[]): number[] {
+function quickSort(arr: (string | number)[]): (number | string)[] {
   if (arr.length <= 1) {
     return arr;
   }
@@ -12,7 +12,7 @@ function quickSort(arr: number[]): number[] {
   const left = [];
   const right = [];
 
-  for (let i = 1; i < arr.length; i++) {
+  for (let i = 0; i < arr.length; i++) {
     if (arr[i] < pivot) {
       left.push(arr[i]);
     } else {
@@ -23,7 +23,7 @@ function quickSort(arr: number[]): number[] {
   return [...quickSort(left), pivot, ...quickSort(right)];
 }
 
-function mergeSort(arr: number[]): number[] {
+function mergeSort(arr: (string | number)[]): (string | number)[] {
   if (arr.length <= 1) {
     return arr;
   }
@@ -34,7 +34,10 @@ function mergeSort(arr: number[]): number[] {
 
   return merge(mergeSort(left), mergeSort(right));
 
-  function merge(left: number[], right: number[]): number[] {
+  function merge(
+    left: (string | number)[],
+    right: (string | number)[]
+  ): (number | string)[] {
     let result = [];
     let leftIndex = 0;
     let rightIndex = 0;
@@ -53,7 +56,7 @@ function mergeSort(arr: number[]): number[] {
   }
 }
 
-function heapSort(arr: number[]) {
+function heapSort(arr: (string | number)[]): (string | number)[] {
   const n = arr.length;
 
   for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
@@ -68,7 +71,7 @@ function heapSort(arr: number[]) {
     heapify(arr, i, 0);
   }
 
-  function heapify(arr: number[], n: number, i: number) {
+  function heapify(arr: (string | number)[], n: number, i: number) {
     let largest = i;
     const left = 2 * i + 1;
     const right = 2 * i + 2;
@@ -89,9 +92,11 @@ function heapSort(arr: number[]) {
       heapify(arr, n, largest);
     }
   }
+
+  return arr;
 }
 
-function insertionSort(arr: number[]) {
+function insertionSort(arr: (string | number)[]): (string | number)[] {
   const n = arr.length;
 
   for (let i = 1; i < n; i++) {
@@ -105,9 +110,11 @@ function insertionSort(arr: number[]) {
 
     arr[j + 1] = key;
   }
+
+  return arr;
 }
 
-function timSort(arr: number[]) {
+function timSort(arr: (string | number)[]): (string | number)[] {
   const MIN_MERGE = 32;
   const n = arr.length;
 
@@ -125,7 +132,11 @@ function timSort(arr: number[]) {
     size *= 2;
   }
 
-  function insertionSortTim(arr: number[], left: number, right: number) {
+  function insertionSortTim(
+    arr: (string | number)[],
+    left: number,
+    right: number
+  ) {
     for (let i = left + 1; i <= right; i++) {
       const key = arr[i];
       let j = i - 1;
@@ -137,7 +148,12 @@ function timSort(arr: number[]) {
     }
   }
 
-  function mergeTim(arr: number[], left: number, mid: number, right: number) {
+  function mergeTim(
+    arr: (string | number)[],
+    left: number,
+    mid: number,
+    right: number
+  ) {
     const leftSize = mid - left + 1;
     const rightSize = right - mid;
 
@@ -186,9 +202,11 @@ function timSort(arr: number[]) {
     }
     return n + r;
   }
+
+  return arr;
 }
 
-function selectionSort(arr: number[]) {
+function selectionSort(arr: (string | number)[]): (string | number)[] {
   const n = arr.length;
 
   for (let i = 0; i < n - 1; i++) {
@@ -205,9 +223,11 @@ function selectionSort(arr: number[]) {
       arr[minIndex] = temp;
     }
   }
+
+  return arr;
 }
 
-function shellSort(arr: number[]) {
+function shellSort(arr: (string | number)[]): (string | number)[] {
   const n = arr.length;
   let gap = Math.floor(n / 2);
 
@@ -226,9 +246,11 @@ function shellSort(arr: number[]) {
 
     gap = Math.floor(gap / 2);
   }
+
+  return arr;
 }
 
-function bubbleSort(arr: number[]) {
+function bubbleSort(arr: (string | number)[]): (string | number)[] {
   const n = arr.length;
 
   for (let i = 0; i < n - 1; i++) {
@@ -249,15 +271,17 @@ function bubbleSort(arr: number[]) {
       break;
     }
   }
+
+  return arr;
 }
 
-function treeSort(arr: number[]): number[] {
+function treeSort(arr: (string | number)[]): (string | number)[] {
   class TreeNode {
-    value: number;
+    value: string | number;
     left: TreeNode | null;
     right: TreeNode | null;
 
-    constructor(value: number) {
+    constructor(value: string | number) {
       this.value = value;
       this.left = null;
       this.right = null;
@@ -271,7 +295,7 @@ function treeSort(arr: number[]): number[] {
       this.root = null;
     }
 
-    insert(value: number) {
+    insert(value: string | number) {
       const newNode = new TreeNode(value);
       if (!this.root) {
         this.root = newNode;
@@ -296,7 +320,10 @@ function treeSort(arr: number[]): number[] {
       }
     }
 
-    inOrderTraversal(node: TreeNode | null, result: number[] = []): number[] {
+    inOrderTraversal(
+      node: TreeNode | null,
+      result: (string | number)[] = []
+    ): (string | number)[] {
       if (node) {
         this.inOrderTraversal(node.left, result);
         result.push(node.value);
@@ -313,7 +340,7 @@ function treeSort(arr: number[]): number[] {
   return tree.inOrderTraversal(tree.root);
 }
 
-function cycleSort(arr: number[]): number[] {
+function cycleSort(arr: (string | number)[]): (string | number)[] {
   const n = arr.length;
 
   for (let cycleStart = 0; cycleStart < n - 1; cycleStart++) {
@@ -364,12 +391,12 @@ function cycleSort(arr: number[]): number[] {
   return arr;
 }
 
-function strandSort(arr: number[]): number[] {
+function strandSort(arr: (string | number)[]): (string | number)[] {
   if (arr.length <= 1) {
     return arr;
   }
 
-  const sublist: number[] = [arr[0]];
+  const sublist: (string | number)[] = [arr[0]];
   arr.splice(0, 1);
 
   let i = 0;
@@ -382,8 +409,11 @@ function strandSort(arr: number[]): number[] {
     }
   }
 
-  function merge(arr1: number[], arr2: number[]): number[] {
-    const merged: number[] = [];
+  function merge(
+    arr1: (string | number)[],
+    arr2: (string | number)[]
+  ): (string | number)[] {
+    const merged: (string | number)[] = [];
     let i = 0;
     let j = 0;
 
@@ -413,7 +443,7 @@ function strandSort(arr: number[]): number[] {
   return merge(strandSort(arr), sublist);
 }
 
-function cocktailShakerSort(arr: number[]): number[] {
+function cocktailShakerSort(arr: (string | number)[]): (string | number)[] {
   let swapped: boolean;
   do {
     swapped = false;
@@ -442,7 +472,7 @@ function cocktailShakerSort(arr: number[]): number[] {
   return arr;
 }
 
-function combSort(arr: number[]): number[] {
+function combSort(arr: (string | number)[]): (string | number)[] {
   const shrinkFactor = 1.3;
   let gap = arr.length;
   let swapped: boolean;
@@ -466,7 +496,7 @@ function combSort(arr: number[]): number[] {
   return arr;
 }
 
-function gnomeSort(arr: number[]): number[] {
+function gnomeSort(arr: (string | number)[]): (string | number)[] {
   let index = 0;
 
   while (index < arr.length) {
@@ -481,7 +511,7 @@ function gnomeSort(arr: number[]): number[] {
   return arr;
 }
 
-function oddEvenSort(arr: number[]): number[] {
+function oddEvenSort(arr: (string | number)[]): (string | number)[] {
   let sorted = false;
 
   while (!sorted) {
@@ -505,12 +535,12 @@ function oddEvenSort(arr: number[]): number[] {
   return arr;
 }
 
-function bogoSort(arr: number[]): number[] {
+function bogoSort(arr: (string | number)[]): (string | number)[] {
   while (!isSorted(arr)) {
     shuffleArray(arr);
   }
 
-  function isSorted(arr: number[]): boolean {
+  function isSorted(arr: (string | number)[]): boolean {
     for (let i = 1; i < arr.length; i++) {
       if (arr[i - 1] > arr[i]) {
         return false;
@@ -519,7 +549,7 @@ function bogoSort(arr: number[]): number[] {
     return true;
   }
 
-  function shuffleArray(arr: number[]): void {
+  function shuffleArray(arr: (string | number)[]): void {
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [arr[i], arr[j]] = [arr[j], arr[i]];
@@ -547,7 +577,7 @@ function sentinelLinearSearch(
   target: number | string
 ): number {
   const lastElement = arr[arr.length - 1];
-  arr[arr.length - 1] = target
+  arr[arr.length - 1] = target;
 
   let i = 0;
   while (arr[i] !== target) {

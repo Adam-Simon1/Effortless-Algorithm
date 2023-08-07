@@ -8,7 +8,7 @@ function quickSort(arr) {
     arr.splice(pivotIndex, 1);
     const left = [];
     const right = [];
-    for (let i = 1; i < arr.length; i++) {
+    for (let i = 0; i < arr.length; i++) {
         if (arr[i] < pivot) {
             left.push(arr[i]);
         }
@@ -71,6 +71,7 @@ function heapSort(arr) {
             heapify(arr, n, largest);
         }
     }
+    return arr;
 }
 function insertionSort(arr) {
     const n = arr.length;
@@ -83,6 +84,7 @@ function insertionSort(arr) {
         }
         arr[j + 1] = key;
     }
+    return arr;
 }
 function timSort(arr) {
     const MIN_MERGE = 32;
@@ -154,6 +156,7 @@ function timSort(arr) {
         }
         return n + r;
     }
+    return arr;
 }
 function selectionSort(arr) {
     const n = arr.length;
@@ -170,6 +173,7 @@ function selectionSort(arr) {
             arr[minIndex] = temp;
         }
     }
+    return arr;
 }
 function shellSort(arr) {
     const n = arr.length;
@@ -186,6 +190,7 @@ function shellSort(arr) {
         }
         gap = Math.floor(gap / 2);
     }
+    return arr;
 }
 function bubbleSort(arr) {
     const n = arr.length;
@@ -205,6 +210,7 @@ function bubbleSort(arr) {
             break;
         }
     }
+    return arr;
 }
 function treeSort(arr) {
     class TreeNode {
@@ -447,16 +453,16 @@ function linearSearch(arr, target) {
 }
 function sentinelLinearSearch(arr, target) {
     const lastElement = arr[arr.length - 1];
-    arr[arr.length - 1] = target; // Replace the last element with the target as a sentinel
+    arr[arr.length - 1] = target;
     let i = 0;
     while (arr[i] !== target) {
         i++;
     }
-    arr[arr.length - 1] = lastElement; // Restore the original last element
+    arr[arr.length - 1] = lastElement;
     if (i < arr.length - 1 || arr[arr.length - 1] === target) {
-        return i; // Return the index where the target was found
+        return i;
     }
-    return -1; // Return -1 if the target was not found in the array
+    return -1;
 }
 // Example usage
 const inputArray = [64, 34, 25, 12, 22, 11, 90];
@@ -467,5 +473,11 @@ const namesArray = ["Alice", "Bob", "Charlie", "David", "Emily", "Frank"];
 const targetName = "David";
 const index2 = sentinelLinearSearch(namesArray, targetName);
 console.log(index2);
+const stringArray = ["alice", "charlie", "bob", "emily", "david", "frank"];
+const sorted = bogoSort(stringArray);
+console.log(sorted);
+const numberArray = [9, 4, 6, 2, 5, 1];
+const sorted2 = bogoSort(numberArray);
+console.log(sorted2);
 export {};
 //# sourceMappingURL=index.js.map
