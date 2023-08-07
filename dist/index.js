@@ -260,9 +260,49 @@ function treeSort(arr) {
     }
     return tree.inOrderTraversal(tree.root);
 }
+function cycleSort(arr) {
+    const n = arr.length;
+    for (let cycleStart = 0; cycleStart < n - 1; cycleStart++) {
+        let item = arr[cycleStart];
+        let pos = cycleStart;
+        for (let i = cycleStart + 1; i < n; i++) {
+            if (arr[i] < item) {
+                pos++;
+            }
+        }
+        if (pos === cycleStart) {
+            continue;
+        }
+        while (item === arr[pos]) {
+            pos++;
+        }
+        if (pos !== cycleStart) {
+            const temp = arr[pos];
+            arr[pos] = item;
+            item = temp;
+        }
+        while (pos !== cycleStart) {
+            pos = cycleStart;
+            for (let i = cycleStart + 1; i < n; i++) {
+                if (arr[i] < item) {
+                    pos++;
+                }
+            }
+            while (item === arr[pos]) {
+                pos++;
+            }
+            if (item !== arr[pos]) {
+                const temp = arr[pos];
+                arr[pos] = item;
+                item = temp;
+            }
+        }
+    }
+    return arr;
+}
 // Example usage
 const unsortedArray = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
-const sortedArray = treeSort(unsortedArray);
+const sortedArray = cycleSort(unsortedArray);
 console.log(sortedArray);
 export {};
 //# sourceMappingURL=index.js.map
