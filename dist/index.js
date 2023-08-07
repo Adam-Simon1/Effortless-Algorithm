@@ -552,10 +552,40 @@ function interpolationSearch(arr, target) {
     }
     return -1;
 }
+function exponentialSearch(arr, target) {
+    const n = arr.length;
+    if (arr[0] === target) {
+        return 0;
+    }
+    let i = 1;
+    while (i < n && arr[i] <= target) {
+        i *= 2;
+    }
+    function binarySearch(arr, left, right, target) {
+        while (left <= right) {
+            const mid = Math.floor((left + right) / 2);
+            if (arr[mid] === target) {
+                return mid;
+            }
+            if (arr[mid] < target) {
+                left = mid + 1;
+            }
+            else {
+                right = mid - 1;
+            }
+        }
+        return -1;
+    }
+    return binarySearch(arr, Math.floor(i / 2), Math.min(i, n - 1), target);
+}
 // Example usage
 const inputArray = [11, 22, 34, 45, 56, 67, 78];
 const targetValue = 22;
-const index1 = interpolationSearch(inputArray, targetValue);
+const index1 = exponentialSearch(inputArray, targetValue);
 console.log(index1);
+const namesArray = ["Alice", "Bob", "Charlie", "David", "Emily", "Frank"];
+const targetName = "David";
+const index2 = exponentialSearch(namesArray, targetName);
+console.log(index2);
 export {};
 //# sourceMappingURL=index.js.map
