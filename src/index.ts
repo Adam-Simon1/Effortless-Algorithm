@@ -529,7 +529,28 @@ function bogoSort(arr: number[]): number[] {
   return arr;
 }
 
+// Search algorithms
+function linearSearch(
+  arr: number[] | string[],
+  target: number | string
+): number {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === target) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+
+
 // Example usage
-const unsortedArray = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
-const sortedArray = bogoSort(unsortedArray);
-console.log(sortedArray);
+const inputArray = [64, 34, 25, 12, 22, 11, 90];
+const targetValue = 22;
+const index1 = linearSearch(inputArray, targetValue);
+console.log(index1);
+
+const namesArray = ["Alice", "Bob", "Charlie", "David", "Emily", "Frank"];
+const targetName = "David";
+const index2 = linearSearch(namesArray, targetName);
+console.log(index2);
