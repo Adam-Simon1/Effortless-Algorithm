@@ -384,9 +384,22 @@ function combSort(arr) {
     } while (gap > 1 || swapped);
     return arr;
 }
+function gnomeSort(arr) {
+    let index = 0;
+    while (index < arr.length) {
+        if (index === 0 || arr[index] >= arr[index - 1]) {
+            index++;
+        }
+        else {
+            [arr[index], arr[index - 1]] = [arr[index - 1], arr[index]];
+            index--;
+        }
+    }
+    return arr;
+}
 // Example usage
 const unsortedArray = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
-const sortedArray = combSort(unsortedArray);
+const sortedArray = gnomeSort(unsortedArray);
 console.log(sortedArray);
 export {};
 //# sourceMappingURL=index.js.map

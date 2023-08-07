@@ -466,7 +466,22 @@ function combSort(arr: number[]): number[] {
   return arr;
 }
 
+function gnomeSort(arr: number[]): number[] {
+  let index = 0;
+
+  while (index < arr.length) {
+    if (index === 0 || arr[index] >= arr[index - 1]) {
+      index++;
+    } else {
+      [arr[index], arr[index - 1]] = [arr[index - 1], arr[index]];
+      index--;
+    }
+  }
+
+  return arr;
+}
+
 // Example usage
 const unsortedArray = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
-const sortedArray = combSort(unsortedArray);
+const sortedArray = gnomeSort(unsortedArray);
 console.log(sortedArray);
