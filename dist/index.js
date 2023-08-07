@@ -1,4 +1,4 @@
-// Sorting alghoritms
+// Sorting algorithms
 function quickSort(arr) {
     if (arr.length <= 1) {
         return arr;
@@ -401,14 +401,12 @@ function oddEvenSort(arr) {
     let sorted = false;
     while (!sorted) {
         sorted = true;
-        // Perform odd-even comparisons and swaps
         for (let i = 1; i < arr.length - 1; i += 2) {
             if (arr[i] > arr[i + 1]) {
                 [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
                 sorted = false;
             }
         }
-        // Perform even-odd comparisons and swaps
         for (let i = 0; i < arr.length - 1; i += 2) {
             if (arr[i] > arr[i + 1]) {
                 [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
@@ -418,9 +416,29 @@ function oddEvenSort(arr) {
     }
     return arr;
 }
+function bogoSort(arr) {
+    while (!isSorted(arr)) {
+        shuffleArray(arr);
+    }
+    function isSorted(arr) {
+        for (let i = 1; i < arr.length; i++) {
+            if (arr[i - 1] > arr[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+    }
+    return arr;
+}
 // Example usage
 const unsortedArray = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
-const sortedArray = oddEvenSort(unsortedArray);
+const sortedArray = bogoSort(unsortedArray);
 console.log(sortedArray);
 export {};
 //# sourceMappingURL=index.js.map
