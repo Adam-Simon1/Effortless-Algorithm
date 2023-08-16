@@ -1,5 +1,5 @@
-// Sorting algorithms
-function quickSort(arr) {
+//* Sorting algorithms
+export function quickSort(arr) {
     if (arr.length <= 1) {
         return arr;
     }
@@ -18,7 +18,7 @@ function quickSort(arr) {
     }
     return [...quickSort(left), pivot, ...quickSort(right)];
 }
-function mergeSort(arr) {
+export function mergeSort(arr) {
     if (arr.length <= 1) {
         return arr;
     }
@@ -43,7 +43,7 @@ function mergeSort(arr) {
         return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
     }
 }
-function heapSort(arr) {
+export function heapSort(arr) {
     const n = arr.length;
     for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
         heapify(arr, n, i);
@@ -73,7 +73,7 @@ function heapSort(arr) {
     }
     return arr;
 }
-function insertionSort(arr) {
+export function insertionSort(arr) {
     const n = arr.length;
     for (let i = 1; i < n; i++) {
         const key = arr[i];
@@ -86,7 +86,7 @@ function insertionSort(arr) {
     }
     return arr;
 }
-function timSort(arr) {
+export function timSort(arr) {
     const MIN_MERGE = 32;
     const n = arr.length;
     for (let i = 0; i < n; i += MIN_MERGE) {
@@ -158,7 +158,7 @@ function timSort(arr) {
     }
     return arr;
 }
-function selectionSort(arr) {
+export function selectionSort(arr) {
     const n = arr.length;
     for (let i = 0; i < n - 1; i++) {
         let minIndex = i;
@@ -175,7 +175,7 @@ function selectionSort(arr) {
     }
     return arr;
 }
-function shellSort(arr) {
+export function shellSort(arr) {
     const n = arr.length;
     let gap = Math.floor(n / 2);
     while (gap > 0) {
@@ -192,7 +192,7 @@ function shellSort(arr) {
     }
     return arr;
 }
-function bubbleSort(arr) {
+export function bubbleSort(arr) {
     const n = arr.length;
     for (let i = 0; i < n - 1; i++) {
         let swapped = false;
@@ -212,7 +212,7 @@ function bubbleSort(arr) {
     }
     return arr;
 }
-function treeSort(arr) {
+export function treeSort(arr) {
     class TreeNode {
         constructor(value) {
             this.value = value;
@@ -266,7 +266,7 @@ function treeSort(arr) {
     }
     return tree.inOrderTraversal(tree.root);
 }
-function cycleSort(arr) {
+export function cycleSort(arr) {
     const n = arr.length;
     for (let cycleStart = 0; cycleStart < n - 1; cycleStart++) {
         let item = arr[cycleStart];
@@ -306,7 +306,7 @@ function cycleSort(arr) {
     }
     return arr;
 }
-function strandSort(arr) {
+export function strandSort(arr) {
     if (arr.length <= 1) {
         return arr;
     }
@@ -348,7 +348,7 @@ function strandSort(arr) {
     }
     return merge(strandSort(arr), sublist);
 }
-function cocktailShakerSort(arr) {
+export function cocktailShakerSort(arr) {
     let swapped;
     do {
         swapped = false;
@@ -371,7 +371,7 @@ function cocktailShakerSort(arr) {
     } while (swapped);
     return arr;
 }
-function combSort(arr) {
+export function combSort(arr) {
     const shrinkFactor = 1.3;
     let gap = arr.length;
     let swapped;
@@ -390,7 +390,7 @@ function combSort(arr) {
     } while (gap > 1 || swapped);
     return arr;
 }
-function gnomeSort(arr) {
+export function gnomeSort(arr) {
     let index = 0;
     while (index < arr.length) {
         if (index === 0 || arr[index] >= arr[index - 1]) {
@@ -403,7 +403,7 @@ function gnomeSort(arr) {
     }
     return arr;
 }
-function oddEvenSort(arr) {
+export function oddEvenSort(arr) {
     let sorted = false;
     while (!sorted) {
         sorted = true;
@@ -422,7 +422,7 @@ function oddEvenSort(arr) {
     }
     return arr;
 }
-function bogoSort(arr) {
+export function bogoSort(arr) {
     while (!isSorted(arr)) {
         shuffleArray(arr);
     }
@@ -442,8 +442,8 @@ function bogoSort(arr) {
     }
     return arr;
 }
-// Search algorithms
-function linearSearch(arr, target) {
+//* Search algorithms
+export function linearSearch(arr, target) {
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] === target) {
             return i;
@@ -451,7 +451,7 @@ function linearSearch(arr, target) {
     }
     return -1;
 }
-function sentinelLinearSearch(arr, target) {
+export function sentinelLinearSearch(arr, target) {
     const lastElement = arr[arr.length - 1];
     arr[arr.length - 1] = target;
     let i = 0;
@@ -464,7 +464,7 @@ function sentinelLinearSearch(arr, target) {
     }
     return -1;
 }
-function binarySearch(arr, target) {
+export function binarySearch(arr, target) {
     let left = 0;
     let right = arr.length - 1;
     while (left <= right) {
@@ -481,7 +481,7 @@ function binarySearch(arr, target) {
     }
     return -1;
 }
-function ternarySearch(arr, target) {
+export function ternarySearch(arr, target) {
     function ternarySearchRecursive(arr, left, right, target) {
         if (left > right) {
             return -1;
@@ -506,7 +506,7 @@ function ternarySearch(arr, target) {
     }
     return ternarySearchRecursive(arr, 0, arr.length - 1, target);
 }
-function jumpSearch(arr, target) {
+export function jumpSearch(arr, target) {
     const n = arr.length;
     let blockSize = Math.floor(Math.sqrt(n));
     let prev = 0;
@@ -528,7 +528,7 @@ function jumpSearch(arr, target) {
     }
     return -1;
 }
-function interpolationSearch(arr, target) {
+export function interpolationSearch(arr, target) {
     let left = 0;
     let right = arr.length - 1;
     while (left <= right && target >= arr[left] && target <= arr[right]) {
@@ -552,7 +552,7 @@ function interpolationSearch(arr, target) {
     }
     return -1;
 }
-function exponentialSearch(arr, target) {
+export function exponentialSearch(arr, target) {
     const n = arr.length;
     if (arr[0] === target) {
         return 0;
@@ -578,14 +578,4 @@ function exponentialSearch(arr, target) {
     }
     return binarySearch(arr, Math.floor(i / 2), Math.min(i, n - 1), target);
 }
-// Example usage
-const inputArray = [11, 22, 34, 45, 56, 67, 78];
-const targetValue = 22;
-const index1 = exponentialSearch(inputArray, targetValue);
-console.log(index1);
-const namesArray = ["Alice", "Bob", "Charlie", "David", "Emily", "Frank"];
-const targetName = "David";
-const index2 = exponentialSearch(namesArray, targetName);
-console.log(index2);
-export {};
 //# sourceMappingURL=index.js.map

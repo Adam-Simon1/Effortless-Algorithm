@@ -1,7 +1,7 @@
 {
-  "name": "algorithms",
-  "version": "1.0.0",
-  "description": "",
+  "name": "effortless-algorithm",
+  "version": "1.0.2",
+  "description": "Library for implementing various algorithms",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -10,11 +10,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Adam-Simon1/Alghoritms.git"
+    "url": "https://github.com/Adam-Simon1/Alghoritms.git"
   },
   "keywords": [
     "alghoritms",
-    "sorting"
+    "sorting",
+    "search",
+    "search algorithms",
+    "sorting algorithms"
+  ],
+  "files": [
+    "dist/*",
+    "index.d.ts"
   ],
   "author": "Adam Simon",
   "license": "MIT",

@@ -1,5 +1,5 @@
-// Sorting algorithms
-function quickSort(arr: (string | number)[]): (number | string)[] {
+//* Sorting algorithms
+export function quickSort(arr: (string | number)[]): (number | string)[] {
   if (arr.length <= 1) {
     return arr;
   }
@@ -23,7 +23,7 @@ function quickSort(arr: (string | number)[]): (number | string)[] {
   return [...quickSort(left), pivot, ...quickSort(right)];
 }
 
-function mergeSort(arr: (string | number)[]): (string | number)[] {
+export function mergeSort(arr: (string | number)[]): (string | number)[] {
   if (arr.length <= 1) {
     return arr;
   }
@@ -56,7 +56,7 @@ function mergeSort(arr: (string | number)[]): (string | number)[] {
   }
 }
 
-function heapSort(arr: (string | number)[]): (string | number)[] {
+export function heapSort(arr: (string | number)[]): (string | number)[] {
   const n = arr.length;
 
   for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
@@ -96,7 +96,7 @@ function heapSort(arr: (string | number)[]): (string | number)[] {
   return arr;
 }
 
-function insertionSort(arr: (string | number)[]): (string | number)[] {
+export function insertionSort(arr: (string | number)[]): (string | number)[] {
   const n = arr.length;
 
   for (let i = 1; i < n; i++) {
@@ -114,7 +114,7 @@ function insertionSort(arr: (string | number)[]): (string | number)[] {
   return arr;
 }
 
-function timSort(arr: (string | number)[]): (string | number)[] {
+export function timSort(arr: (string | number)[]): (string | number)[] {
   const MIN_MERGE = 32;
   const n = arr.length;
 
@@ -206,7 +206,7 @@ function timSort(arr: (string | number)[]): (string | number)[] {
   return arr;
 }
 
-function selectionSort(arr: (string | number)[]): (string | number)[] {
+export function selectionSort(arr: (string | number)[]): (string | number)[] {
   const n = arr.length;
 
   for (let i = 0; i < n - 1; i++) {
@@ -227,7 +227,7 @@ function selectionSort(arr: (string | number)[]): (string | number)[] {
   return arr;
 }
 
-function shellSort(arr: (string | number)[]): (string | number)[] {
+export function shellSort(arr: (string | number)[]): (string | number)[] {
   const n = arr.length;
   let gap = Math.floor(n / 2);
 
@@ -250,7 +250,7 @@ function shellSort(arr: (string | number)[]): (string | number)[] {
   return arr;
 }
 
-function bubbleSort(arr: (string | number)[]): (string | number)[] {
+export function bubbleSort(arr: (string | number)[]): (string | number)[] {
   const n = arr.length;
 
   for (let i = 0; i < n - 1; i++) {
@@ -275,7 +275,7 @@ function bubbleSort(arr: (string | number)[]): (string | number)[] {
   return arr;
 }
 
-function treeSort(arr: (string | number)[]): (string | number)[] {
+export function treeSort(arr: (string | number)[]): (string | number)[] {
   class TreeNode {
     value: string | number;
     left: TreeNode | null;
@@ -340,7 +340,7 @@ function treeSort(arr: (string | number)[]): (string | number)[] {
   return tree.inOrderTraversal(tree.root);
 }
 
-function cycleSort(arr: (string | number)[]): (string | number)[] {
+export function cycleSort(arr: (string | number)[]): (string | number)[] {
   const n = arr.length;
 
   for (let cycleStart = 0; cycleStart < n - 1; cycleStart++) {
@@ -391,7 +391,7 @@ function cycleSort(arr: (string | number)[]): (string | number)[] {
   return arr;
 }
 
-function strandSort(arr: (string | number)[]): (string | number)[] {
+export function strandSort(arr: (string | number)[]): (string | number)[] {
   if (arr.length <= 1) {
     return arr;
   }
@@ -443,7 +443,9 @@ function strandSort(arr: (string | number)[]): (string | number)[] {
   return merge(strandSort(arr), sublist);
 }
 
-function cocktailShakerSort(arr: (string | number)[]): (string | number)[] {
+export function cocktailShakerSort(
+  arr: (string | number)[]
+): (string | number)[] {
   let swapped: boolean;
   do {
     swapped = false;
@@ -472,7 +474,7 @@ function cocktailShakerSort(arr: (string | number)[]): (string | number)[] {
   return arr;
 }
 
-function combSort(arr: (string | number)[]): (string | number)[] {
+export function combSort(arr: (string | number)[]): (string | number)[] {
   const shrinkFactor = 1.3;
   let gap = arr.length;
   let swapped: boolean;
@@ -496,7 +498,7 @@ function combSort(arr: (string | number)[]): (string | number)[] {
   return arr;
 }
 
-function gnomeSort(arr: (string | number)[]): (string | number)[] {
+export function gnomeSort(arr: (string | number)[]): (string | number)[] {
   let index = 0;
 
   while (index < arr.length) {
@@ -511,7 +513,7 @@ function gnomeSort(arr: (string | number)[]): (string | number)[] {
   return arr;
 }
 
-function oddEvenSort(arr: (string | number)[]): (string | number)[] {
+export function oddEvenSort(arr: (string | number)[]): (string | number)[] {
   let sorted = false;
 
   while (!sorted) {
@@ -535,7 +537,7 @@ function oddEvenSort(arr: (string | number)[]): (string | number)[] {
   return arr;
 }
 
-function bogoSort(arr: (string | number)[]): (string | number)[] {
+export function bogoSort(arr: (string | number)[]): (string | number)[] {
   while (!isSorted(arr)) {
     shuffleArray(arr);
   }
@@ -559,8 +561,8 @@ function bogoSort(arr: (string | number)[]): (string | number)[] {
   return arr;
 }
 
-// Search algorithms
-function linearSearch(
+//* Search algorithms
+export function linearSearch(
   arr: number[] | string[],
   target: number | string
 ): number {
@@ -572,7 +574,7 @@ function linearSearch(
   return -1;
 }
 
-function sentinelLinearSearch(
+export function sentinelLinearSearch(
   arr: number[] | string[],
   target: number | string
 ): number {
@@ -593,7 +595,7 @@ function sentinelLinearSearch(
   return -1;
 }
 
-function binarySearch(
+export function binarySearch(
   arr: number[] | string[],
   target: number | string
 ): number {
@@ -615,7 +617,7 @@ function binarySearch(
   return -1;
 }
 
-function ternarySearch(
+export function ternarySearch(
   arr: number[] | string[],
   target: number | string
 ): number {
@@ -650,7 +652,10 @@ function ternarySearch(
   return ternarySearchRecursive(arr, 0, arr.length - 1, target);
 }
 
-function jumpSearch(arr: number[] | string[], target: number | string): number {
+export function jumpSearch(
+  arr: number[] | string[],
+  target: number | string
+): number {
   const n = arr.length;
   let blockSize = Math.floor(Math.sqrt(n));
   let prev = 0;
@@ -677,7 +682,7 @@ function jumpSearch(arr: number[] | string[], target: number | string): number {
   return -1;
 }
 
-function interpolationSearch(arr: number[], target: number): number {
+export function interpolationSearch(arr: number[], target: number): number {
   let left = 0;
   let right = arr.length - 1;
 
@@ -709,7 +714,7 @@ function interpolationSearch(arr: number[], target: number): number {
   return -1;
 }
 
-function exponentialSearch(
+export function exponentialSearch(
   arr: number[] | string[],
   target: number | string
 ): number {
@@ -734,29 +739,18 @@ function exponentialSearch(
       const mid = Math.floor((left + right) / 2);
 
       if (arr[mid] === target) {
-        return mid; 
+        return mid;
       }
 
       if (arr[mid] < target) {
-        left = mid + 1; 
+        left = mid + 1;
       } else {
-        right = mid - 1; 
+        right = mid - 1;
       }
     }
 
-    return -1; 
+    return -1;
   }
 
   return binarySearch(arr, Math.floor(i / 2), Math.min(i, n - 1), target);
 }
-
-// Example usage
-const inputArray = [11, 22, 34, 45, 56, 67, 78];
-const targetValue = 22;
-const index1 = exponentialSearch(inputArray, targetValue);
-console.log(index1);
-
-const namesArray = ["Alice", "Bob", "Charlie", "David", "Emily", "Frank"];
-const targetName = "David";
-const index2 = exponentialSearch(namesArray, targetName);
-console.log(index2);
